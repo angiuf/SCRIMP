@@ -803,7 +803,7 @@ class MAPFEnv(gym.Env):
                 # ensure new goal does not at the same grid of old goals or obstacles
                 goals[x, y] = goal_counter
                 goal_counter += 1
-        self.world = State(world, goals, self.num_agents)
+        self.world = State(world, goals, self.num_agents)    
 
     def observe(self, agent_id):
         """return one agent's observation"""
@@ -1092,3 +1092,142 @@ class MAPFEnv(gym.Env):
         self.reset_renderer = False
         result = self.viewer.render(return_rgb_array=mode == 'rgb_array')
         return result
+
+class WarehouseEnv(MAPFEnv):
+    def __init__(self, num_agents=EnvParameters.N_AGENTS, size=EnvParameters.WORLD_SIZE):
+        """initialization"""
+        self.num_agents = num_agents
+        self.observation_size = EnvParameters.FOV_SIZE
+        self.SIZE = size  # size of a side of the square grid
+        self.max_on_goal = 0
+
+        self.set_world()
+        self.action_space = spaces.Tuple([spaces.Discrete(self.num_agents), spaces.Discrete(EnvParameters.N_ACTIONS)])
+        self.viewer = None
+
+    def set_world(self):
+                            
+        # prob = np.random.triangular(self.PROB[0], .33 * self.PROB[0] + .66 * self.PROB[1],
+        #                             self.PROB[1])  # sample a value from triangular distribution
+        # size = np.random.choice([self.SIZE[0], self.SIZE[0] * .5 + self.SIZE[1] * .5, self.SIZE[1]],
+        #                         p=[.5, .25, .25])  # sample a value according to the given probability
+        size = self.SIZE  # fixed world0 size and obstacle density for evaluation
+        # world = -(np.random.rand(int(size), int(size)) < prob).astype(int)  # -1 obstacle,0 nothing, >0 agent id
+
+        world = self.get_warehouse_obs()
+
+        open_list = self.get_open_list()
+
+        # Error if n_agents > len(open_list)
+        if self.num_agents > len(open_list)/2:
+            raise ValueError(f"n_agents %d must be less than or equal to the available pairs of start/goal positions %d" % (self.num_agents, len(open_list)/2))
+
+        # randomize the position of agents
+        agent_counter = 1
+        agent_locations = []
+        while agent_counter <= self.num_agents:
+            agent_rand_pos = random.choice(open_list)
+            open_list.remove(agent_rand_pos)
+            x = agent_rand_pos[0]
+            y = agent_rand_pos[1]
+            if world[x, y] == 0:
+                world[x, y] = agent_counter
+                agent_locations.append((x, y))
+                agent_counter += 1
+
+        # randomize the position of goals
+        goals = np.zeros(world.shape).astype(int)
+        goal_counter = 1
+        while goal_counter <= self.num_agents:
+            goal_rand_pos = random.choice(open_list)
+            open_list.remove(goal_rand_pos)
+            x = goal_rand_pos[0]
+            y = goal_rand_pos[1]
+            if goals[x, y] == 0 and world[x, y] != -1:
+                # ensure new goal does not at the same grid of old goals or obstacles
+                goals[x, y] = goal_counter
+                goal_counter += 1
+        self.world = State(world, goals, self.num_agents)
+
+    def get_warehouse_obs(self):
+        return np.array([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0],
+                        [0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0],
+                        [0, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0],
+                        [0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0],
+                        [0, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0],
+                        [0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0],
+                        [0, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        ])
+
+    def get_open_list(self):    
+        open_list = [[3, 0],
+                    [4, 0],
+                    [5, 0],
+                    [6, 0],
+                    [7, 0],
+                    [8, 0],
+                    [9, 0],
+                    [10, 0],
+                    [11, 0],
+                    [12, 0], 
+                    [3, 14],
+                    [4, 14],
+                    [5, 14],
+                    [6, 14],
+                    [7, 14],
+                    [8, 14],
+                    [9, 14],
+                    [10, 14],
+                    [11, 14],
+                    [12, 14],
+                    [2, 4],
+                    [2, 6],
+                    [2, 8],
+                    [2, 10],
+                    [4, 4],
+                    [4, 6],
+                    [4, 8],
+                    [4, 10],
+                    [6, 4],
+                    [6, 6],
+                    [6, 8],
+                    [6, 10],
+                    [8, 4],
+                    [8, 6],
+                    [8, 8],
+                    [8, 10],
+                    [10, 4],
+                    [10, 6],
+                    [10, 8],
+                    [10, 10],
+                    [12, 4],
+                    [12, 6],
+                    [12, 8],
+                    [12, 10]]
+        
+        # # Error if n_agents > len(open_list)
+        # if n_agents > len(open_list)/2:
+        #     raise ValueError(f"n_agents %d must be less than or equal to the available pairs of start/goal positions %d" % (n_agents, len(open_list)/2))
+        
+        # start_pos = []
+        # goal_pos = []
+        # for i in range(n_agents):
+        #     # Randomly choose a starting point
+        #     start = random.choice(open_list)
+        #     open_list.remove(start)
+        #     # Randomly choose a goal point
+        #     goal = random.choice(open_list)
+        #     open_list.remove(goal)
+        #     start_pos.append(start)
+        #     goal_pos.append(goal)
+        
+        # return np.array(start_pos), np.array(goal_pos)
+        return open_list
