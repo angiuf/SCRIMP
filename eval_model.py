@@ -11,9 +11,10 @@ from model import Model
 from util import reset_env, make_gif, set_global_seeds
 
 NUM_TIMES = 100
-CASE = [[8, 10, 0], [8, 10, 0.15], [8, 10, 0.3], [16, 20, 0.0], [16, 20, 0.15], [16, 20, 0.3], [32, 30, 0.0],
-        [32, 30, 0.15], [32, 30, 0.3], [64, 40, 0.0], [64, 40, 0.15], [64, 40, 0.3], [128, 40, 0.0],
-        [128, 40, 0.15], [128, 40, 0.3]]
+# CASE = [[8, 10, 0], [8, 10, 0.15], [8, 10, 0.3], [16, 20, 0.0], [16, 20, 0.15], [16, 20, 0.3], [32, 30, 0.0],
+#         [32, 30, 0.15], [32, 30, 0.3], [64, 40, 0.0], [64, 40, 0.15], [64, 40, 0.3], [128, 40, 0.0],
+#         [128, 40, 0.15], [128, 40, 0.3]]
+CASE  = [[8, 20, 0.3]]
 set_global_seeds(SetupParameters.SEED)
 
 
@@ -89,7 +90,7 @@ if __name__ == "__main__":
 
     # recording
     wandb_id = wandb.util.generate_id()
-    wandb.init(project='MAPF_evaluation',
+    wandb.init(project='SCRIMP_evaluation',
                name='evaluation_global_SCRIMP',
                entity=RecordingParameters.ENTITY,
                notes=RecordingParameters.EXPERIMENT_NOTE,

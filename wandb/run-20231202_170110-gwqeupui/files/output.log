@@ -1,0 +1,33 @@
+id is:gwqeupui
+Launching wandb...
+agent: 8, world: 10, obstacle: 0
+wrote gif
+0
+20
+40
+60
+80
+EL: 12.4, MR: 8.0, CO: 0.01,SR:100.0
+EL_STD: 2.26, MR_STD: 0.0, CO_STD: 0.07
+-----------------------------------------------------------------------------------------------
+agent: 8, world: 10, obstacle: 0.15
+0
+20
+40
+60
+Traceback (most recent call last):
+  File "eval_model.py", line 114, in <module>
+    eval_performance_dict = evaluate(env, model, torch.device('cpu'), episodic_buffer, k[0], save_gif)
+  File "eval_model.py", line 36, in evaluate
+    done, _, obs, vector, _ = reset_env(eval_env, num_agent)
+  File "/home/andrea/Thesis/baselines/SCRIMP/util.py", line 152, in reset_env
+    done = env._reset(num_agent)
+  File "/home/andrea/Thesis/baselines/SCRIMP/mapf_gym.py", line 864, in _reset
+    self.set_world()  # back to the initial situation
+  File "/home/andrea/Thesis/baselines/SCRIMP/mapf_gym.py", line 806, in set_world
+    self.world = State(world, goals, self.num_agents)
+  File "/home/andrea/Thesis/baselines/SCRIMP/mapf_gym.py", line 34, in __init__
+    self.get_heuri_map()
+  File "/home/andrea/Thesis/baselines/SCRIMP/mapf_gym.py", line 632, in get_heuri_map
+    up = x - 1, y
+KeyboardInterrupt

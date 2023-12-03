@@ -9,7 +9,7 @@ class EnvParameters:
     EPISODE_LEN = 256  # maximum episode length in training
     FOV_SIZE = 3
     WORLD_SIZE = (10, 40)
-    OBSTACLE_PROB = (0.0, 0.5)
+    OBSTACLE_PROB = [0.0, 0.5]
     ACTION_COST = -0.3
     IDLE_COST = -0.3
     GOAL_REWARD = 0.0
@@ -76,7 +76,7 @@ class RecordingParameters:
     WANDB =  True
     TENSORBOARD = True
     TXT_WRITER =  True
-    ENTITY = 'yutong'
+    ENTITY = 'andrea-giuffrida'
     TIME = datetime.datetime.now().strftime('%d-%m-%y%H%M')
     EXPERIMENT_PROJECT = 'MAPF'
     EXPERIMENT_NAME = 'SCRIMP'

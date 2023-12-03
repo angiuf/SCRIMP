@@ -1,0 +1,191 @@
+2023-12-02 13:16:11,026 INFO    StreamThr :11161 [internal.py:wandb_internal():89] W&B internal server running at pid: 11161, started at: 2023-12-02 13:16:10.984193
+2023-12-02 13:16:11,029 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: status
+2023-12-02 13:16:11,034 INFO    WriterThread:11161 [datastore.py:open_for_write():85] open: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/run-kob22fw7.wandb
+2023-12-02 13:16:11,034 DEBUG   SenderThread:11161 [sender.py:send():380] send: header
+2023-12-02 13:16:11,055 DEBUG   SenderThread:11161 [sender.py:send():380] send: run
+2023-12-02 13:16:11,068 INFO    SenderThread:11161 [sender.py:_maybe_setup_resume():760] checking resume status for andrea-giuffrida/SCRIMP_evaluation/kob22fw7
+2023-12-02 13:16:11,901 INFO    SenderThread:11161 [dir_watcher.py:__init__():211] watching files in: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files
+2023-12-02 13:16:11,901 INFO    SenderThread:11161 [sender.py:_start_run_threads():1127] run started: kob22fw7 with start time 1701519370.983614
+2023-12-02 13:16:11,928 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: check_version
+2023-12-02 13:16:11,929 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: check_version
+2023-12-02 13:16:12,163 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: run_start
+2023-12-02 13:16:12,281 DEBUG   HandlerThread:11161 [system_info.py:__init__():32] System info init
+2023-12-02 13:16:12,281 DEBUG   HandlerThread:11161 [system_info.py:__init__():47] System info init done
+2023-12-02 13:16:12,281 INFO    HandlerThread:11161 [system_monitor.py:start():194] Starting system monitor
+2023-12-02 13:16:12,281 INFO    SystemMonitor:11161 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-12-02 13:16:12,282 INFO    HandlerThread:11161 [system_monitor.py:probe():214] Collecting system info
+2023-12-02 13:16:12,283 INFO    SystemMonitor:11161 [interfaces.py:start():190] Started cpu monitoring
+2023-12-02 13:16:12,286 INFO    SystemMonitor:11161 [interfaces.py:start():190] Started disk monitoring
+2023-12-02 13:16:12,296 INFO    SystemMonitor:11161 [interfaces.py:start():190] Started gpu monitoring
+2023-12-02 13:16:12,300 INFO    SystemMonitor:11161 [interfaces.py:start():190] Started memory monitoring
+2023-12-02 13:16:12,302 INFO    SystemMonitor:11161 [interfaces.py:start():190] Started network monitoring
+2023-12-02 13:16:12,330 DEBUG   HandlerThread:11161 [system_info.py:probe():196] Probing system
+2023-12-02 13:16:12,355 ERROR   gpu       :11161 [interfaces.py:monitor():144] Failed to sample metric: Not Supported
+2023-12-02 13:16:12,481 DEBUG   HandlerThread:11161 [system_info.py:_probe_git():181] Probing git
+2023-12-02 13:16:12,494 DEBUG   HandlerThread:11161 [system_info.py:_probe_git():189] Probing git done
+2023-12-02 13:16:12,494 DEBUG   HandlerThread:11161 [system_info.py:probe():244] Probing system done
+2023-12-02 13:16:12,494 DEBUG   HandlerThread:11161 [system_monitor.py:probe():223] {'os': 'Linux-5.15.133.1-microsoft-standard-WSL2-x86_64-with-debian-bookworm-sid', 'python': '3.7.16', 'heartbeatAt': '2023-12-02T12:16:12.330919', 'startedAt': '2023-12-02T12:16:10.964231', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': 'eval_model.py', 'codePathLocal': 'eval_model.py', 'codePath': 'eval_model.py', 'git': {'remote': 'git@github.com:marmotlab/SCRIMP.git', 'commit': 'df3e7d95ed87b1967a164105d33b7bca4309cdec'}, 'email': 'andrea.giuffrida@live.it', 'root': '/home/andrea/Thesis/baselines/SCRIMP', 'host': 'DELL-ANDREA', 'username': 'andrea', 'executable': '/home/andrea/miniconda3/envs/SCRIMP-env/bin/python', 'cpu_count': 6, 'cpu_count_logical': 12, 'cpu_freq': {'current': 2592.0080000000003, 'min': 0.0, 'max': 0.0}, 'cpu_freq_per_core': [{'current': 2592.008, 'min': 0.0, 'max': 0.0}, {'current': 2592.008, 'min': 0.0, 'max': 0.0}, {'current': 2592.008, 'min': 0.0, 'max': 0.0}, {'current': 2592.008, 'min': 0.0, 'max': 0.0}, {'current': 2592.008, 'min': 0.0, 'max': 0.0}, {'current': 2592.008, 'min': 0.0, 'max': 0.0}, {'current': 2592.008, 'min': 0.0, 'max': 0.0}, {'current': 2592.008, 'min': 0.0, 'max': 0.0}, {'current': 2592.008, 'min': 0.0, 'max': 0.0}, {'current': 2592.008, 'min': 0.0, 'max': 0.0}, {'current': 2592.008, 'min': 0.0, 'max': 0.0}, {'current': 2592.008, 'min': 0.0, 'max': 0.0}], 'disk': {'/': {'total': 250.92389297485352, 'used': 58.97370529174805}}, 'gpu': 'NVIDIA GeForce GTX 1650', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce GTX 1650', 'memory_total': 4294967296}], 'memory': {'total': 7.626121520996094}}
+2023-12-02 13:16:12,495 INFO    HandlerThread:11161 [system_monitor.py:probe():224] Finished collecting system info
+2023-12-02 13:16:12,495 INFO    HandlerThread:11161 [system_monitor.py:probe():227] Publishing system info
+2023-12-02 13:16:12,495 DEBUG   HandlerThread:11161 [system_info.py:_save_pip():53] Saving list of pip packages installed into the current environment
+2023-12-02 13:16:12,495 DEBUG   HandlerThread:11161 [system_info.py:_save_pip():68] Saving pip packages done
+2023-12-02 13:16:12,495 DEBUG   HandlerThread:11161 [system_info.py:_save_conda():76] Saving list of conda packages installed into the current environment
+2023-12-02 13:16:12,904 INFO    Thread-12 :11161 [dir_watcher.py:_on_file_created():271] file/dir created: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/requirements.txt
+2023-12-02 13:16:12,904 INFO    Thread-12 :11161 [dir_watcher.py:_on_file_created():271] file/dir created: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/conda-environment.yaml
+2023-12-02 13:16:14,361 ERROR   gpu       :11161 [interfaces.py:monitor():144] Failed to sample metric: Not Supported
+2023-12-02 13:16:15,850 DEBUG   HandlerThread:11161 [system_info.py:_save_conda():87] Saving conda packages done
+2023-12-02 13:16:15,852 INFO    HandlerThread:11161 [system_monitor.py:probe():229] Finished publishing system info
+2023-12-02 13:16:15,859 DEBUG   SenderThread:11161 [sender.py:send():380] send: files
+2023-12-02 13:16:15,859 INFO    SenderThread:11161 [sender.py:_save_file():1380] saving file wandb-metadata.json with policy now
+2023-12-02 13:16:15,867 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: stop_status
+2023-12-02 13:16:15,868 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: stop_status
+2023-12-02 13:16:15,870 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-02 13:16:15,903 INFO    Thread-12 :11161 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/conda-environment.yaml
+2023-12-02 13:16:15,903 INFO    Thread-12 :11161 [dir_watcher.py:_on_file_created():271] file/dir created: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/wandb-metadata.json
+2023-12-02 13:16:16,294 DEBUG   SenderThread:11161 [sender.py:send():380] send: telemetry
+2023-12-02 13:16:16,296 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: status_report
+2023-12-02 13:16:16,303 DEBUG   SenderThread:11161 [sender.py:send():380] send: exit
+2023-12-02 13:16:16,303 INFO    SenderThread:11161 [sender.py:send_exit():585] handling exit code: 1
+2023-12-02 13:16:16,304 INFO    SenderThread:11161 [sender.py:send_exit():587] handling runtime: 3
+2023-12-02 13:16:16,313 INFO    SenderThread:11161 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-02 13:16:16,314 INFO    SenderThread:11161 [sender.py:send_exit():593] send defer
+2023-12-02 13:16:16,315 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: defer
+2023-12-02 13:16:16,316 INFO    HandlerThread:11161 [handler.py:handle_request_defer():172] handle defer: 0
+2023-12-02 13:16:16,321 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: defer
+2023-12-02 13:16:16,321 INFO    SenderThread:11161 [sender.py:send_request_defer():609] handle sender defer: 0
+2023-12-02 13:16:16,321 INFO    SenderThread:11161 [sender.py:transition_state():613] send defer: 1
+2023-12-02 13:16:16,323 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: defer
+2023-12-02 13:16:16,323 INFO    HandlerThread:11161 [handler.py:handle_request_defer():172] handle defer: 1
+2023-12-02 13:16:16,324 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: defer
+2023-12-02 13:16:16,325 INFO    SenderThread:11161 [sender.py:send_request_defer():609] handle sender defer: 1
+2023-12-02 13:16:16,325 INFO    SenderThread:11161 [sender.py:transition_state():613] send defer: 2
+2023-12-02 13:16:16,326 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: defer
+2023-12-02 13:16:16,326 INFO    HandlerThread:11161 [handler.py:handle_request_defer():172] handle defer: 2
+2023-12-02 13:16:16,326 INFO    HandlerThread:11161 [system_monitor.py:finish():203] Stopping system monitor
+2023-12-02 13:16:16,327 DEBUG   SystemMonitor:11161 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-12-02 13:16:16,328 DEBUG   SystemMonitor:11161 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-12-02 13:16:16,329 INFO    HandlerThread:11161 [interfaces.py:finish():202] Joined cpu monitor
+2023-12-02 13:16:16,329 DEBUG   SystemMonitor:11161 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-12-02 13:16:16,341 INFO    HandlerThread:11161 [interfaces.py:finish():202] Joined disk monitor
+2023-12-02 13:16:16,369 INFO    HandlerThread:11161 [interfaces.py:finish():202] Joined gpu monitor
+2023-12-02 13:16:16,370 INFO    HandlerThread:11161 [interfaces.py:finish():202] Joined memory monitor
+2023-12-02 13:16:16,370 INFO    HandlerThread:11161 [interfaces.py:finish():202] Joined network monitor
+2023-12-02 13:16:16,370 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: defer
+2023-12-02 13:16:16,371 INFO    SenderThread:11161 [sender.py:send_request_defer():609] handle sender defer: 2
+2023-12-02 13:16:16,371 INFO    SenderThread:11161 [sender.py:transition_state():613] send defer: 3
+2023-12-02 13:16:16,371 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: defer
+2023-12-02 13:16:16,371 INFO    HandlerThread:11161 [handler.py:handle_request_defer():172] handle defer: 3
+2023-12-02 13:16:16,372 DEBUG   SenderThread:11161 [sender.py:send():380] send: stats
+2023-12-02 13:16:16,372 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: defer
+2023-12-02 13:16:16,372 INFO    SenderThread:11161 [sender.py:send_request_defer():609] handle sender defer: 3
+2023-12-02 13:16:16,372 INFO    SenderThread:11161 [sender.py:transition_state():613] send defer: 4
+2023-12-02 13:16:16,372 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: defer
+2023-12-02 13:16:16,372 INFO    HandlerThread:11161 [handler.py:handle_request_defer():172] handle defer: 4
+2023-12-02 13:16:16,372 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: defer
+2023-12-02 13:16:16,373 INFO    SenderThread:11161 [sender.py:send_request_defer():609] handle sender defer: 4
+2023-12-02 13:16:16,373 INFO    SenderThread:11161 [sender.py:transition_state():613] send defer: 5
+2023-12-02 13:16:16,373 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: defer
+2023-12-02 13:16:16,373 INFO    HandlerThread:11161 [handler.py:handle_request_defer():172] handle defer: 5
+2023-12-02 13:16:16,373 DEBUG   SenderThread:11161 [sender.py:send():380] send: summary
+2023-12-02 13:16:16,374 INFO    SenderThread:11161 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-02 13:16:16,374 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: defer
+2023-12-02 13:16:16,374 INFO    SenderThread:11161 [sender.py:send_request_defer():609] handle sender defer: 5
+2023-12-02 13:16:16,374 INFO    SenderThread:11161 [sender.py:transition_state():613] send defer: 6
+2023-12-02 13:16:16,374 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: defer
+2023-12-02 13:16:16,374 INFO    HandlerThread:11161 [handler.py:handle_request_defer():172] handle defer: 6
+2023-12-02 13:16:16,375 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: defer
+2023-12-02 13:16:16,375 INFO    SenderThread:11161 [sender.py:send_request_defer():609] handle sender defer: 6
+2023-12-02 13:16:16,379 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: status_report
+2023-12-02 13:16:16,700 INFO    wandb-upload_0:11161 [upload_job.py:push():131] Uploaded file /tmp/tmpxgjstp4mwandb/aruys6m0-wandb-metadata.json
+2023-12-02 13:16:16,733 INFO    SenderThread:11161 [sender.py:transition_state():613] send defer: 7
+2023-12-02 13:16:16,733 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: defer
+2023-12-02 13:16:16,734 INFO    HandlerThread:11161 [handler.py:handle_request_defer():172] handle defer: 7
+2023-12-02 13:16:16,734 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: defer
+2023-12-02 13:16:16,734 INFO    SenderThread:11161 [sender.py:send_request_defer():609] handle sender defer: 7
+2023-12-02 13:16:16,904 INFO    Thread-12 :11161 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/config.yaml
+2023-12-02 13:16:16,904 INFO    Thread-12 :11161 [dir_watcher.py:_on_file_created():271] file/dir created: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/output.log
+2023-12-02 13:16:16,904 INFO    Thread-12 :11161 [dir_watcher.py:_on_file_created():271] file/dir created: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/wandb-summary.json
+2023-12-02 13:16:16,916 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: poll_exit
+2023-12-02 13:16:18,315 INFO    SenderThread:11161 [sender.py:transition_state():613] send defer: 8
+2023-12-02 13:16:18,316 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: poll_exit
+2023-12-02 13:16:18,317 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: defer
+2023-12-02 13:16:18,317 INFO    HandlerThread:11161 [handler.py:handle_request_defer():172] handle defer: 8
+2023-12-02 13:16:18,318 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: defer
+2023-12-02 13:16:18,318 INFO    SenderThread:11161 [sender.py:send_request_defer():609] handle sender defer: 8
+2023-12-02 13:16:18,318 INFO    SenderThread:11161 [job_builder.py:build():298] Attempting to build job artifact
+2023-12-02 13:16:18,319 INFO    SenderThread:11161 [job_builder.py:_get_source_type():428] is repo sourced job
+2023-12-02 13:16:18,371 INFO    SenderThread:11161 [job_builder.py:build():404] adding wandb-job metadata file
+2023-12-02 13:16:18,383 INFO    SenderThread:11161 [sender.py:transition_state():613] send defer: 9
+2023-12-02 13:16:18,383 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: defer
+2023-12-02 13:16:18,383 INFO    HandlerThread:11161 [handler.py:handle_request_defer():172] handle defer: 9
+2023-12-02 13:16:18,384 DEBUG   SenderThread:11161 [sender.py:send():380] send: artifact
+2023-12-02 13:16:18,905 INFO    Thread-12 :11161 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/output.log
+2023-12-02 13:16:20,380 INFO    wandb-upload_1:11161 [upload_job.py:push():89] Uploaded file /home/andrea/.local/share/wandb/artifacts/staging/tmpwwl9f4f8
+2023-12-02 13:16:20,384 INFO    wandb-upload_2:11161 [upload_job.py:push():89] Uploaded file /home/andrea/.local/share/wandb/artifacts/staging/tmp704b38pz
+2023-12-02 13:16:21,814 INFO    SenderThread:11161 [sender.py:send_artifact():1458] sent artifact job-git_github.com_marmotlab_SCRIMP.git_eval_model.py - {'id': 'QXJ0aWZhY3Q6NjU1MzYxNDEz', 'state': 'PENDING', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjEyMDMxNjI2Nw==', 'latestArtifact': None}}
+2023-12-02 13:16:21,815 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: defer
+2023-12-02 13:16:21,815 INFO    SenderThread:11161 [sender.py:send_request_defer():609] handle sender defer: 9
+2023-12-02 13:16:21,815 INFO    SenderThread:11161 [dir_watcher.py:finish():358] shutting down directory watcher
+2023-12-02 13:16:21,815 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: status_report
+2023-12-02 13:16:21,908 INFO    SenderThread:11161 [dir_watcher.py:finish():388] scan: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files
+2023-12-02 13:16:21,908 INFO    SenderThread:11161 [dir_watcher.py:finish():402] scan save: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/output.log output.log
+2023-12-02 13:16:21,909 INFO    SenderThread:11161 [dir_watcher.py:finish():402] scan save: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/conda-environment.yaml conda-environment.yaml
+2023-12-02 13:16:21,909 INFO    SenderThread:11161 [dir_watcher.py:finish():402] scan save: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/config.yaml config.yaml
+2023-12-02 13:16:21,915 INFO    SenderThread:11161 [dir_watcher.py:finish():402] scan save: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/wandb-metadata.json wandb-metadata.json
+2023-12-02 13:16:21,916 INFO    SenderThread:11161 [dir_watcher.py:finish():402] scan save: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/requirements.txt requirements.txt
+2023-12-02 13:16:21,924 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: keepalive
+2023-12-02 13:16:21,930 INFO    SenderThread:11161 [dir_watcher.py:finish():402] scan save: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/wandb-summary.json wandb-summary.json
+2023-12-02 13:16:21,931 INFO    SenderThread:11161 [sender.py:transition_state():613] send defer: 10
+2023-12-02 13:16:21,931 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: defer
+2023-12-02 13:16:21,931 INFO    HandlerThread:11161 [handler.py:handle_request_defer():172] handle defer: 10
+2023-12-02 13:16:21,933 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: defer
+2023-12-02 13:16:21,933 INFO    SenderThread:11161 [sender.py:send_request_defer():609] handle sender defer: 10
+2023-12-02 13:16:21,933 INFO    SenderThread:11161 [file_pusher.py:finish():175] shutting down file pusher
+2023-12-02 13:16:22,368 INFO    wandb-upload_1:11161 [upload_job.py:push():131] Uploaded file /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/config.yaml
+2023-12-02 13:16:22,459 INFO    wandb-upload_0:11161 [upload_job.py:push():131] Uploaded file /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/output.log
+2023-12-02 13:16:22,598 INFO    wandb-upload_4:11161 [upload_job.py:push():131] Uploaded file /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/conda-environment.yaml
+2023-12-02 13:16:22,618 INFO    wandb-upload_6:11161 [upload_job.py:push():131] Uploaded file /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/requirements.txt
+2023-12-02 13:16:22,649 INFO    wandb-upload_7:11161 [upload_job.py:push():131] Uploaded file /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/files/wandb-summary.json
+2023-12-02 13:16:22,850 INFO    Thread-11 :11161 [sender.py:transition_state():613] send defer: 11
+2023-12-02 13:16:22,851 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: defer
+2023-12-02 13:16:22,851 INFO    HandlerThread:11161 [handler.py:handle_request_defer():172] handle defer: 11
+2023-12-02 13:16:22,853 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: defer
+2023-12-02 13:16:22,853 INFO    SenderThread:11161 [sender.py:send_request_defer():609] handle sender defer: 11
+2023-12-02 13:16:22,853 INFO    SenderThread:11161 [file_pusher.py:join():181] waiting for file pusher
+2023-12-02 13:16:22,853 INFO    SenderThread:11161 [sender.py:transition_state():613] send defer: 12
+2023-12-02 13:16:22,854 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: defer
+2023-12-02 13:16:22,854 INFO    HandlerThread:11161 [handler.py:handle_request_defer():172] handle defer: 12
+2023-12-02 13:16:22,855 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: defer
+2023-12-02 13:16:22,856 INFO    SenderThread:11161 [sender.py:send_request_defer():609] handle sender defer: 12
+2023-12-02 13:16:22,856 INFO    SenderThread:11161 [file_stream.py:finish():595] file stream finish called
+2023-12-02 13:16:23,247 INFO    SenderThread:11161 [file_stream.py:finish():599] file stream finish is done
+2023-12-02 13:16:23,248 INFO    SenderThread:11161 [sender.py:transition_state():613] send defer: 13
+2023-12-02 13:16:23,248 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: defer
+2023-12-02 13:16:23,248 INFO    HandlerThread:11161 [handler.py:handle_request_defer():172] handle defer: 13
+2023-12-02 13:16:23,249 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: defer
+2023-12-02 13:16:23,249 INFO    SenderThread:11161 [sender.py:send_request_defer():609] handle sender defer: 13
+2023-12-02 13:16:23,249 INFO    SenderThread:11161 [sender.py:transition_state():613] send defer: 14
+2023-12-02 13:16:23,250 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: defer
+2023-12-02 13:16:23,250 INFO    HandlerThread:11161 [handler.py:handle_request_defer():172] handle defer: 14
+2023-12-02 13:16:23,251 DEBUG   SenderThread:11161 [sender.py:send():380] send: final
+2023-12-02 13:16:23,251 DEBUG   SenderThread:11161 [sender.py:send():380] send: footer
+2023-12-02 13:16:23,252 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: defer
+2023-12-02 13:16:23,252 INFO    SenderThread:11161 [sender.py:send_request_defer():609] handle sender defer: 14
+2023-12-02 13:16:23,253 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: poll_exit
+2023-12-02 13:16:23,254 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: poll_exit
+2023-12-02 13:16:23,256 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: server_info
+2023-12-02 13:16:23,257 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: server_info
+2023-12-02 13:16:23,262 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: get_summary
+2023-12-02 13:16:23,264 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: sampled_history
+2023-12-02 13:16:23,265 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-02 13:16:23,266 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: job_info
+2023-12-02 13:16:23,453 DEBUG   SenderThread:11161 [sender.py:send_request():407] send_request: job_info
+2023-12-02 13:16:23,455 INFO    MainThread:11161 [wandb_run.py:_footer_history_summary_info():3760] rendering history
+2023-12-02 13:16:23,456 INFO    MainThread:11161 [wandb_run.py:_footer_history_summary_info():3792] rendering summary
+2023-12-02 13:16:23,457 INFO    MainThread:11161 [wandb_run.py:_footer_sync_info():3719] logging synced files
+2023-12-02 13:16:23,458 DEBUG   HandlerThread:11161 [handler.py:handle_request():146] handle_request: shutdown
+2023-12-02 13:16:23,458 INFO    HandlerThread:11161 [handler.py:finish():866] shutting down handler
+2023-12-02 13:16:24,267 INFO    WriterThread:11161 [datastore.py:close():294] close: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131610-kob22fw7/run-kob22fw7.wandb
+2023-12-02 13:16:24,454 INFO    SenderThread:11161 [sender.py:finish():1536] shutting down sender
+2023-12-02 13:16:24,455 INFO    SenderThread:11161 [file_pusher.py:finish():175] shutting down file pusher
+2023-12-02 13:16:24,455 INFO    SenderThread:11161 [file_pusher.py:join():181] waiting for file pusher

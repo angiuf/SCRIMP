@@ -1,0 +1,26 @@
+id is:pmfcs0w2
+Launching wandb...
+agent: 8, world: 10, obstacle: 0
+wrote gif
+0
+20
+Traceback (most recent call last):
+  File "eval_model.py", line 114, in <module>
+    eval_performance_dict = evaluate(env, model, torch.device('cpu'), episodic_buffer, k[0], save_gif)
+  File "eval_model.py", line 51, in evaluate
+    greedy=False)
+  File "/home/andrea/Thesis/baselines/SCRIMP/model.py", line 102, in final_evaluate
+    ps, v_in, v_ex, _, _, output_state, _, message = self.network(observation, vector, input_state, message)
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/torch/autocast_mode.py", line 12, in decorate_autocast
+    return func(*args, **kwargs)
+  File "/home/andrea/Thesis/baselines/SCRIMP/net.py", line 91, in forward
+    x_1 = F.relu(self.conv1b(x_1))
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/torch/nn/modules/conv.py", line 447, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/torch/nn/modules/conv.py", line 444, in _conv_forward
+    self.padding, self.dilation, self.groups)
+KeyboardInterrupt

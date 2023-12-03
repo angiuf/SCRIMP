@@ -1,0 +1,10 @@
+id is:z5dtqps8
+Launching wandb...
+Traceback (most recent call last):
+  File "eval_model.py", line 106, in <module>
+    env = MAPFEnv(num_agents=k[0], size=k[1], prob=k[2])
+  File "/home/andrea/Thesis/baselines/SCRIMP/mapf_gym.py", line 695, in __init__
+    self.set_world()
+  File "/home/andrea/Thesis/baselines/SCRIMP/mapf_gym.py", line 776, in set_world
+    prob = np.random.triangular(self.PROB[0], .33 * self.PROB[0] + .66 * self.PROB[1],
+TypeError: 'int' object is not subscriptable

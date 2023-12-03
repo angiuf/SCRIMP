@@ -1,0 +1,108 @@
+{
+    "os": "Linux-5.15.133.1-microsoft-standard-WSL2-x86_64-with-debian-bookworm-sid",
+    "python": "3.7.16",
+    "heartbeatAt": "2023-12-02T16:05:00.752409",
+    "startedAt": "2023-12-02T16:04:57.846786",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "eval_model.py",
+    "codePathLocal": "eval_model.py",
+    "codePath": "eval_model.py",
+    "git": {
+        "remote": "git@github.com:marmotlab/SCRIMP.git",
+        "commit": "df3e7d95ed87b1967a164105d33b7bca4309cdec"
+    },
+    "email": "andrea.giuffrida@live.it",
+    "root": "/home/andrea/Thesis/baselines/SCRIMP",
+    "host": "DELL-ANDREA",
+    "username": "andrea",
+    "executable": "/home/andrea/miniconda3/envs/SCRIMP-env/bin/python",
+    "cpu_count": 6,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 2592.0089999999996,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2592.009,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2592.009,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2592.009,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2592.009,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2592.009,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2592.009,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2592.009,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2592.009,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2592.009,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2592.009,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2592.009,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2592.009,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 250.92389297485352,
+            "used": 58.982460021972656
+        }
+    },
+    "gpu": "NVIDIA GeForce GTX 1650",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce GTX 1650",
+            "memory_total": 4294967296
+        }
+    ],
+    "memory": {
+        "total": 7.626121520996094
+    }
+}

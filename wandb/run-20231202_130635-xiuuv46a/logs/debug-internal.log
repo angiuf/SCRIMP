@@ -1,0 +1,50 @@
+2023-12-02 13:06:35,801 INFO    StreamThr :9200 [internal.py:wandb_internal():89] W&B internal server running at pid: 9200, started at: 2023-12-02 13:06:35.799062
+2023-12-02 13:06:35,808 DEBUG   HandlerThread:9200 [handler.py:handle_request():146] handle_request: status
+2023-12-02 13:06:35,832 INFO    WriterThread:9200 [datastore.py:open_for_write():85] open: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_130635-xiuuv46a/run-xiuuv46a.wandb
+2023-12-02 13:06:35,833 DEBUG   SenderThread:9200 [sender.py:send():380] send: header
+2023-12-02 13:06:35,938 DEBUG   SenderThread:9200 [sender.py:send():380] send: run
+2023-12-02 13:06:35,962 INFO    SenderThread:9200 [sender.py:_maybe_setup_resume():760] checking resume status for yutong/MAPF_evaluation/xiuuv46a
+2023-12-02 13:06:36,697 ERROR   SenderThread:9200 [internal_api.py:execute():370] 404 response executing GraphQL.
+2023-12-02 13:06:36,697 ERROR   SenderThread:9200 [internal_api.py:execute():371] {"errors":[{"message":"project not found","path":["upsertBucket"]}],"data":{"upsertBucket":null}}
+2023-12-02 13:06:36,697 ERROR   SenderThread:9200 [sender.py:send_run():979] It appears that you do not have permission to access the requested resource. Please reach out to the project owner to grant you access. If you have the correct permissions, verify that there are no issues with your networking setup.(Error 404: Not Found)
+Traceback (most recent call last):
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/wandb/sdk/lib/retry.py", line 131, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/wandb/sdk/internal/internal_api.py", line 366, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/wandb/sdk/lib/gql_request.py", line 59, in execute
+    request.raise_for_status()
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.wandb.ai/graphql
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/wandb/sdk/internal/sender.py", line 977, in send_run
+    self._init_run(run, config_value_dict)
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/wandb/sdk/internal/sender.py", line 1029, in _init_run
+    commit=run.git.commit or None,
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/wandb/apis/normalize.py", line 73, in wrapper
+    raise err
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/wandb/apis/normalize.py", line 41, in wrapper
+    return func(*args, **kwargs)
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/wandb/sdk/internal/internal_api.py", line 2012, in upsert_run
+    **kwargs,
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/wandb/sdk/internal/internal_api.py", line 341, in gql
+    **kwargs,
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/wandb/sdk/lib/retry.py", line 147, in __call__
+    retry_timedelta_triggered = check_retry_fn(e)
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/wandb/util.py", line 965, in check_retry_fn
+    return fallback_retry_fn(e)
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/wandb/util.py", line 908, in no_retry_auth
+    "It appears that you do not have permission to access the requested resource. "
+wandb.errors.CommError: It appears that you do not have permission to access the requested resource. Please reach out to the project owner to grant you access. If you have the correct permissions, verify that there are no issues with your networking setup.(Error 404: Not Found)
+2023-12-02 13:06:36,914 DEBUG   HandlerThread:9200 [handler.py:handle_request():146] handle_request: shutdown
+2023-12-02 13:06:36,915 INFO    HandlerThread:9200 [handler.py:finish():866] shutting down handler
+2023-12-02 13:06:36,939 INFO    WriterThread:9200 [datastore.py:close():294] close: /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_130635-xiuuv46a/run-xiuuv46a.wandb
+2023-12-02 13:06:37,703 INFO    SenderThread:9200 [sender.py:finish():1536] shutting down sender

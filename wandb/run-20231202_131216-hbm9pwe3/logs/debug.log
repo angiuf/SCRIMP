@@ -1,0 +1,31 @@
+2023-12-02 13:12:16,674 INFO    MainThread:10134 [wandb_setup.py:_flush():76] Current SDK version is 0.16.0
+2023-12-02 13:12:16,674 INFO    MainThread:10134 [wandb_setup.py:_flush():76] Configure stats pid to 10134
+2023-12-02 13:12:16,674 INFO    MainThread:10134 [wandb_setup.py:_flush():76] Loading settings from /home/andrea/.config/wandb/settings
+2023-12-02 13:12:16,674 INFO    MainThread:10134 [wandb_setup.py:_flush():76] Loading settings from /home/andrea/Thesis/baselines/SCRIMP/wandb/settings
+2023-12-02 13:12:16,674 INFO    MainThread:10134 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-12-02 13:12:16,674 INFO    MainThread:10134 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-12-02 13:12:16,674 INFO    MainThread:10134 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'wandb_project_test.py', 'program_abspath': '/home/andrea/Thesis/baselines/SCRIMP/wandb_project_test.py', 'program': 'wandb_project_test.py'}
+2023-12-02 13:12:16,674 INFO    MainThread:10134 [wandb_init.py:_log_setup():524] Logging user logs to /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131216-hbm9pwe3/logs/debug.log
+2023-12-02 13:12:16,674 INFO    MainThread:10134 [wandb_init.py:_log_setup():525] Logging internal logs to /home/andrea/Thesis/baselines/SCRIMP/wandb/run-20231202_131216-hbm9pwe3/logs/debug-internal.log
+2023-12-02 13:12:16,674 INFO    MainThread:10134 [wandb_init.py:init():564] calling init triggers
+2023-12-02 13:12:16,674 INFO    MainThread:10134 [wandb_init.py:init():572] wandb.init called with sweep_config: {}
+config: {'learning_rate': 0.02, 'architecture': 'CNN', 'dataset': 'CIFAR-100', 'epochs': 10}
+2023-12-02 13:12:16,675 INFO    MainThread:10134 [wandb_init.py:init():614] starting backend
+2023-12-02 13:12:16,675 INFO    MainThread:10134 [wandb_init.py:init():618] setting up manager
+2023-12-02 13:12:16,678 INFO    MainThread:10134 [backend.py:_multiprocessing_setup():107] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2023-12-02 13:12:16,679 INFO    MainThread:10134 [wandb_init.py:init():624] backend started and connected
+2023-12-02 13:12:16,682 INFO    MainThread:10134 [wandb_init.py:init():716] updated telemetry
+2023-12-02 13:12:16,692 INFO    MainThread:10134 [wandb_init.py:init():749] communicating run to backend with 90.0 second timeout
+2023-12-02 13:12:17,313 INFO    MainThread:10134 [wandb_run.py:_on_init():2254] communicating current version
+2023-12-02 13:12:17,481 INFO    MainThread:10134 [wandb_run.py:_on_init():2263] got version response 
+2023-12-02 13:12:17,482 INFO    MainThread:10134 [wandb_init.py:init():800] starting run threads in backend
+2023-12-02 13:12:26,504 WARNING MsgRouterThr:10134 [router.py:message_loop():77] message_loop has been closed
+2023-12-02 13:12:32,690 ERROR   MainThread:10134 [wandb_init.py:init():1184] transport failed
+Traceback (most recent call last):
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/wandb/sdk/wandb_init.py", line 1166, in init
+    run = wi.init()
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/wandb/sdk/wandb_init.py", line 811, in init
+    run_start_result = run_start_handle.wait(timeout=30)
+  File "/home/andrea/miniconda3/envs/SCRIMP-env/lib/python3.7/site-packages/wandb/sdk/lib/mailbox.py", line 281, in wait
+    raise MailboxError("transport failed")
+wandb.sdk.lib.mailbox.MailboxError: transport failed
