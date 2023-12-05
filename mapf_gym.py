@@ -1213,21 +1213,4 @@ class WarehouseEnv(MAPFEnv):
                     [12, 8],
                     [12, 10]]
         
-        # # Error if n_agents > len(open_list)
-        # if n_agents > len(open_list)/2:
-        #     raise ValueError(f"n_agents %d must be less than or equal to the available pairs of start/goal positions %d" % (n_agents, len(open_list)/2))
-        
-        # start_pos = []
-        # goal_pos = []
-        # for i in range(n_agents):
-        #     # Randomly choose a starting point
-        #     start = random.choice(open_list)
-        #     open_list.remove(start)
-        #     # Randomly choose a goal point
-        #     goal = random.choice(open_list)
-        #     open_list.remove(goal)
-        #     start_pos.append(start)
-        #     goal_pos.append(goal)
-        
-        # return np.array(start_pos), np.array(goal_pos)
         return open_list
