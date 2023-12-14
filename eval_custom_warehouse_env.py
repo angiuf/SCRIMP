@@ -9,12 +9,13 @@ from episodic_buffer import EpisodicBuffer
 from mapf_gym import WarehouseEnv
 from model import Model
 from util import reset_env, make_gif, set_global_seeds
+import csv
 
 NUM_TIMES = 200
 # CASE = [[8, 10, 0], [8, 10, 0.15], [8, 10, 0.3], [16, 20, 0.0], [16, 20, 0.15], [16, 20, 0.3], [32, 30, 0.0],
 #         [32, 30, 0.15], [32, 30, 0.3], [64, 40, 0.0], [64, 40, 0.15], [64, 40, 0.3], [128, 40, 0.0],
 #         [128, 40, 0.15], [128, 40, 0.3]]
-CASE  = [[22, 15]] # [num_agents, env_size]
+CASE  = [[4, 15], [8, 15], [12, 15], [16, 15], [20, 15], [22, 15]] # [num_agents, env_size]
 set_global_seeds(SetupParameters.SEED)
 
 
@@ -31,7 +32,7 @@ def one_step(env0, actions, model0, pre_value, input_state, ps, one_episode_perf
 
 def evaluate(eval_env, model0, device, episodic_buffer0, num_agent, save_gif0):
     """Evaluate Model."""
-    one_episode_perf = {'episode_len': 0, 'max_goals': 0, 'collide': 0, 'success_rate': 0}
+    one_episode_perf = {'episode_len': 0, 'max_goals': 0, 'collide': 0, 'success_rate': 0, 'total_steps': 0, 'avg_steps': 0}
     episode_frames = []
 
     done, _, obs, vector, _ = reset_env(eval_env, num_agent)
@@ -47,14 +48,20 @@ def evaluate(eval_env, model0, device, episodic_buffer0, num_agent, save_gif0):
     if save_gif0:
         episode_frames.append(eval_env._render(mode='rgb_array', screen_width=900, screen_height=900))
 
+    step_count = 0
     while not done:
         actions, hidden_state, v_all, ps, message = model0.final_evaluate(obs, vector, hidden_state, message, num_agent,
                                                                           greedy=False)
+        
 
         rewards, obs, vector, done, one_episode_perf, max_on_goals, on_goal = one_step(eval_env, actions, model0, v_all,
                                                                                        hidden_state, ps,
                                                                                        one_episode_perf, message,
                                                                                        episodic_buffer0)
+        # Count non zero actions
+        steps = np.count_nonzero(actions)
+        step_count += steps
+
         new_xy = eval_env.get_positions()
         processed_rewards, _, intrinsic_reward, min_dist = episodic_buffer0.if_reward(new_xy, rewards, done, on_goal)
 
@@ -71,6 +78,8 @@ def evaluate(eval_env, model0, device, episodic_buffer0, num_agent, save_gif0):
             one_episode_perf['max_goals'] = max_on_goals
             one_episode_perf['collide'] = one_episode_perf['collide'] / (
                     (one_episode_perf['episode_len'] + 1) * num_agent)
+            one_episode_perf['total_steps'] = step_count
+            one_episode_perf['avg_steps'] = step_count / num_agent
             if save_gif0:
                 if not os.path.exists(RecordingParameters.GIFS_PATH):
                     os.makedirs(RecordingParameters.GIFS_PATH)
@@ -80,6 +89,16 @@ def evaluate(eval_env, model0, device, episodic_buffer0, num_agent, save_gif0):
 
     return one_episode_perf
 
+def get_csv_logger(model_dir, default_model_name):
+    csv_path = os.path.join(model_dir, "log-"+default_model_name+".csv")
+    create_folders_if_necessary(csv_path)
+    csv_file = open(csv_path, "a")
+    return csv_file, csv.writer(csv_file)
+
+def create_folders_if_necessary(path):
+    dirname = os.path.dirname(path)
+    if not os.path.isdir(dirname):
+        os.makedirs(dirname)
 
 if __name__ == "__main__":
     # download trained model0
@@ -87,6 +106,9 @@ if __name__ == "__main__":
     path_checkpoint = model_path + "/net_checkpoint.pkl"
     model = Model(0, torch.device('cpu'))
     model.network.load_state_dict(torch.load(path_checkpoint)['model'])
+    date = datetime.datetime.now().strftime("%y-%m-%d-%H-%M-%S")
+    model_name = 'evaluation_custom_warehouse_SCRIMP_' + date
+    csv_file, csv_logger = get_csv_logger(model_path, model_name)
 
     # recording
     wandb_id = wandb.util.generate_id()
@@ -107,8 +129,8 @@ if __name__ == "__main__":
         env = WarehouseEnv(num_agents=k[0], size=k[1])
         episodic_buffer = EpisodicBuffer(2e6, k[0])
 
-        all_perf_dict = {'episode_len': [], 'max_goals': [], 'collide': [], 'success_rate': []}
-        all_perf_dict_std = {'episode_len': [], 'max_goals': [], 'collide': []}
+        all_perf_dict = {'episode_len': [], 'max_goals': [], 'collide': [], 'success_rate': [], 'total_steps': [], 'avg_steps': []}
+        all_perf_dict_std = {'episode_len': [], 'max_goals': [], 'collide': [], 'total_steps': [], 'avg_steps': []}
         print('agent: {}, world: {}'.format(k[0], k[1]))
 
         for j in range(NUM_TIMES):
@@ -131,13 +153,25 @@ if __name__ == "__main__":
                 all_perf_dict_std[i] = np.std(all_perf_dict[i])
             all_perf_dict[i] = np.nanmean(all_perf_dict[i])
 
-        print('EL: {}, MR: {}, CO: {},SR:{}'.format(round(all_perf_dict['episode_len'], 2),
+        print('EL: {}, MR: {}, CO: {}, SR: {}, total_steps: {}, avg_steps: {}'.format(round(all_perf_dict['episode_len'], 2),
                                                     round(all_perf_dict['max_goals'], 2),
                                                     round(all_perf_dict['collide'] * 100, 2),
-                                                    all_perf_dict['success_rate'] * 100))
-        print('EL_STD: {}, MR_STD: {}, CO_STD: {}'.format(round(all_perf_dict_std['episode_len'], 2),
+                                                    all_perf_dict['success_rate'] * 100,
+                                                    round(all_perf_dict['total_steps'], 2),
+                                                    round(all_perf_dict['avg_steps'], 2)))
+        print('EL_STD: {}, MR_STD: {}, CO_STD: {}, total_step_STD: {}, avg_step_STD: {}'.format(round(all_perf_dict_std['episode_len'], 2),
                                                             round(all_perf_dict_std['max_goals'], 2),
-                                                            round(all_perf_dict_std['collide'] * 100, 2)))
+                                                            round(all_perf_dict_std['collide'] * 100, 2),
+                                                            round(all_perf_dict_std['total_steps'], 2),
+                                                            round(all_perf_dict_std['avg_steps'], 2)))
+        
+        header = ["n_agents", "success_rate", "collision_rate", "total_step", "avg_step", "episode_length", "max_goals", "collision_rate_std", "total_step_std", "avg_step_std", "episode_length_std", "max_goals_std"]
+        data = [k[0], all_perf_dict['success_rate'], all_perf_dict['collide'], all_perf_dict['total_steps'], all_perf_dict['avg_steps'], all_perf_dict['episode_len'], all_perf_dict['max_goals'], all_perf_dict_std['collide'], all_perf_dict_std['total_steps'], all_perf_dict_std['avg_steps'], all_perf_dict_std['episode_len'], all_perf_dict_std['max_goals']]
+        if k[0] == 4:
+            csv_logger.writerow(header)
+        csv_logger.writerow(data)
+        csv_file.flush()
+
         print('-----------------------------------------------------------------------------------------------')
 
     print('finished')
