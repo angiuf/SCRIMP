@@ -147,9 +147,9 @@ def make_gif(images, file_name):
     print("wrote gif")
 
 
-def reset_env(env, num_agent):
+def reset_env(env, num_agent, case_id):
     """reset environment"""
-    done = env._reset(num_agent)
+    done = env._reset(num_agent, case_id)
     prev_action = np.zeros(num_agent)
     valid_actions = []
     obs = np.zeros((1, num_agent, NetParameters.NUM_CHANNEL, EnvParameters.FOV_SIZE, EnvParameters.FOV_SIZE), dtype=np.float32)

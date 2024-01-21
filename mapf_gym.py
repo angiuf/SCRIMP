@@ -1094,18 +1094,31 @@ class MAPFEnv(gym.Env):
         return result
 
 class WarehouseEnv(MAPFEnv):
-    def __init__(self, num_agents=EnvParameters.N_AGENTS, size=EnvParameters.WORLD_SIZE):
+    def __init__(self, dataset_path, map_name, num_agents=EnvParameters.N_AGENTS, size=EnvParameters.WORLD_SIZE):
         """initialization"""
         self.num_agents = num_agents
         self.observation_size = EnvParameters.FOV_SIZE
         self.SIZE = size  # size of a side of the square grid
         self.max_on_goal = 0
+        self.dataset_path = dataset_path
+        self.map_name = map_name
 
-        self.set_world()
+        self.load_test_case(0)
+
         self.action_space = spaces.Tuple([spaces.Discrete(self.num_agents), spaces.Discrete(EnvParameters.N_ACTIONS)])
         self.viewer = None
 
-    def set_world(self):
+    def load_test_case(self, case_id):
+        map = np.load(self.dataset_path + self.map_name + '/input/map/' + self.map_name + '.npy')
+        
+        case_filepath = self.dataset_path + self.map_name + '/input/start_and_goal/' + str(self.num_agents) + '_agents/' + self.map_name + '_' + str(self.num_agents) + '_agents_ID_' + str(case_id).zfill(5) + '.npy'
+        start_pos, goal_pos = np.load(case_filepath, allow_pickle=True)
+
+        self.set_world(map, start_pos, goal_pos)
+
+        return map, start_pos, goal_pos
+
+    def set_world(self, world, start_pos, goal_pos):
                             
         # prob = np.random.triangular(self.PROB[0], .33 * self.PROB[0] + .66 * self.PROB[1],
         #                             self.PROB[1])  # sample a value from triangular distribution
@@ -1114,22 +1127,18 @@ class WarehouseEnv(MAPFEnv):
         size = self.SIZE  # fixed world0 size and obstacle density for evaluation
         # world = -(np.random.rand(int(size), int(size)) < prob).astype(int)  # -1 obstacle,0 nothing, >0 agent id
 
-        world = self.get_warehouse_obs()
-
-        open_list = self.get_open_list()
-
-        # Error if n_agents > len(open_list)
-        if self.num_agents > len(open_list)/2:
-            raise ValueError(f"n_agents %d must be less than or equal to the available pairs of start/goal positions %d" % (self.num_agents, len(open_list)/2))
+        # Trasform world obstacle value from 1 to -1
+        world[world == 1] = -1
+        # Transpose world
+        world = np.transpose(world)
 
         # randomize the position of agents
         agent_counter = 1
         agent_locations = []
         while agent_counter <= self.num_agents:
-            agent_rand_pos = random.choice(open_list)
-            open_list.remove(agent_rand_pos)
-            x = agent_rand_pos[0]
-            y = agent_rand_pos[1]
+            agent_rand_pos = start_pos[agent_counter-1]
+            x = agent_rand_pos[1]
+            y = agent_rand_pos[0]
             if world[x, y] == 0:
                 world[x, y] = agent_counter
                 agent_locations.append((x, y))
@@ -1139,78 +1148,21 @@ class WarehouseEnv(MAPFEnv):
         goals = np.zeros(world.shape).astype(int)
         goal_counter = 1
         while goal_counter <= self.num_agents:
-            goal_rand_pos = random.choice(open_list)
-            open_list.remove(goal_rand_pos)
-            x = goal_rand_pos[0]
-            y = goal_rand_pos[1]
+            goal_rand_pos = goal_pos[goal_counter-1]
+            x = goal_rand_pos[1]
+            y = goal_rand_pos[0]
             if goals[x, y] == 0 and world[x, y] != -1:
                 # ensure new goal does not at the same grid of old goals or obstacles
                 goals[x, y] = goal_counter
                 goal_counter += 1
         self.world = State(world, goals, self.num_agents)
 
-    def get_warehouse_obs(self):
-        return np.array([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0],
-                        [0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0],
-                        [0, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0],
-                        [0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0],
-                        [0, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0],
-                        [0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0],
-                        [0, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        ])
+    def _reset(self, num_agents, case_id):
+        """restart a new task"""
+        self.num_agents = num_agents
+        self.max_on_goal = 0
+        if self.viewer is not None:
+            self.viewer = None
 
-    def get_open_list(self):    
-        open_list = [[3, 0],
-                    [4, 0],
-                    [5, 0],
-                    [6, 0],
-                    [7, 0],
-                    [8, 0],
-                    [9, 0],
-                    [10, 0],
-                    [11, 0],
-                    [12, 0], 
-                    [3, 14],
-                    [4, 14],
-                    [5, 14],
-                    [6, 14],
-                    [7, 14],
-                    [8, 14],
-                    [9, 14],
-                    [10, 14],
-                    [11, 14],
-                    [12, 14],
-                    [2, 4],
-                    [2, 6],
-                    [2, 8],
-                    [2, 10],
-                    [4, 4],
-                    [4, 6],
-                    [4, 8],
-                    [4, 10],
-                    [6, 4],
-                    [6, 6],
-                    [6, 8],
-                    [6, 10],
-                    [8, 4],
-                    [8, 6],
-                    [8, 8],
-                    [8, 10],
-                    [10, 4],
-                    [10, 6],
-                    [10, 8],
-                    [10, 10],
-                    [12, 4],
-                    [12, 6],
-                    [12, 8],
-                    [12, 10]]
-        
-        return open_list
+        self.load_test_case(case_id)
+        return False
