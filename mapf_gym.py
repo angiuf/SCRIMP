@@ -2,13 +2,13 @@ import copy
 import math
 import random
 import sys
+from pathlib import Path
 
-import gym
+import gymnasium as gym
+from gymnasium import spaces
 import numpy as np
 import torch
 import torch.nn.functional as F
-from gym import spaces
-from gym.envs.classic_control import rendering
 from matplotlib.colors import hsv_to_rgb
 
 from alg_parameters import *
@@ -447,7 +447,7 @@ class State(object):
                                 curr_position[winner] = past_position[winner]
                             continue
 
-                        if self.state[px + dx, py + dy] < 0:  # collide with static obstacles
+                        if self.state[px + dx, py + dy] < 0:  # collide with static obstacle
                             agent_status[i] = -2
                             collide_with_obstacle[i] = 1
                             imag_state[curr_position[i]] -= 1
@@ -1100,7 +1100,7 @@ class WarehouseEnv(MAPFEnv):
         self.observation_size = EnvParameters.FOV_SIZE
         self.SIZE = size  # size of a side of the square grid
         self.max_on_goal = 0
-        self.dataset_path = dataset_path
+        self.dataset_path = Path(dataset_path)
         self.map_name = map_name
 
         self.load_test_case(0)
@@ -1109,17 +1109,20 @@ class WarehouseEnv(MAPFEnv):
         self.viewer = None
 
     def load_test_case(self, case_id):
-        map = np.load(self.dataset_path + self.map_name + '/input/map/' + self.map_name + '.npy')
+        map_path = self.dataset_path / self.map_name / 'input/map' / f'{self.map_name}.npy'
+        case_filepath = self.dataset_path / self.map_name / 'input/start_and_goal' / f'{self.num_agents}_agents' / f'{self.map_name}_{self.num_agents}_agents_ID_{str(case_id).zfill(3)}.npy'
         
-        case_filepath = self.dataset_path + self.map_name + '/input/start_and_goal/' + str(self.num_agents) + '_agents/' + self.map_name + '_' + str(self.num_agents) + '_agents_ID_' + str(case_id).zfill(5) + '.npy'
-        start_pos, goal_pos = np.load(case_filepath, allow_pickle=True)
+        map = np.load(map_path)
+        pos = np.load(case_filepath, allow_pickle=True)
+
+        start_pos = pos[:, 0]
+        goal_pos = pos[:, 1]
 
         self.set_world(map, start_pos, goal_pos)
 
         return map, start_pos, goal_pos
 
     def set_world(self, world, start_pos, goal_pos):
-                            
         # prob = np.random.triangular(self.PROB[0], .33 * self.PROB[0] + .66 * self.PROB[1],
         #                             self.PROB[1])  # sample a value from triangular distribution
         # size = np.random.choice([self.SIZE[0], self.SIZE[0] * .5 + self.SIZE[1] * .5, self.SIZE[1]],
