@@ -3,3 +3,6 @@
 *.pkl
 gifs/
 wandb/run*
+
+results/
+final/
